@@ -13,9 +13,8 @@ function ImgBox() {
 
   useEffect(() => {
     async function getData() {
-      const url = "http://localhost:3001/images";
       try {
-        const response = await fetch(url);
+        const response = await fetch(url + "/images");
         if (!response.ok) {
           throw new Error(`Response status: ${response.status}`);
         }
