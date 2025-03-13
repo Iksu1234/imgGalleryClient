@@ -5,26 +5,22 @@ import Image from "react-bootstrap/Image";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import { useState, useEffect } from "react";
-
-const url = import.meta.env.VITE_URL;
+import { fetchImages, patchRatings } from "../services/apiService";
 
 function ImgBox() {
   const [jsonData, setJsonData] = useState({ images: [] });
 
-  useEffect(() => {
-    async function getData() {
-      try {
-        const response = await fetch(url + "/images");
-        if (!response.ok) {
-          throw new Error(`Response status: ${response.status}`);
-        }
-        const data = await response.json();
-        setJsonData(data);
-      } catch (error) {
-        console.error(error.message);
-      }
+  async function getImageData() {
+    try {
+      const response = await fetchImages();
+      setJsonData(response);
+    } catch (error) {
+      console.error(error.message);
     }
-    getData();
+  }
+
+  useEffect(() => {
+    getImageData();
   }, []);
 
   return (
@@ -83,19 +79,7 @@ function ImgBox() {
       }
     }
     try {
-      fetch(`${url}/ratings`, {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(ratings),
-      }).then((response) => {
-        if (!response.ok) {
-          throw new Error("Failed to send ratings");
-        } else {
-          alert("Ratings sent successfully");
-        }
-      });
+      patchRatings(ratings);
     } catch (error) {
       error.message = "Failed to send ratings";
     }
