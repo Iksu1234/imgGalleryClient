@@ -18,7 +18,9 @@ function Login({ onLoginSuccess }) {
       );
 
       if (response.ok) {
-        onLoginSuccess();
+        const result = await response.json();
+        console.log(result);
+        onLoginSuccess(result); // Handle admin status
       } else {
         const error = await response.text();
         console.error("Error:", error); // Handle login failure

@@ -34,7 +34,7 @@ export const patchRatings = async (ratings) => {
 //POST login to api
 export const postLogin = async (account, password) => {
   try {
-    const response = await fetch(API_URL + "/login", {
+    const response = fetch(API_URL + "/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

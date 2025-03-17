@@ -4,7 +4,8 @@ import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
 
-function Header() {
+// eslint-disable-next-line react/prop-types
+function Header({ isAdmin }) {
   return (
     <>
       <Navbar
@@ -34,10 +35,13 @@ function Header() {
             <div className="float-end mx-3">
               <Navbar.Collapse id="basic-navbar-nav">
                 <Nav className="me-auto">
-                  <NavDropdown title="Admin controls" id="basic-nav-dropdown">
-                    <NavDropdown.Item href="#action/add_images">
-                      Add images
-                    </NavDropdown.Item>
+                  <NavDropdown title="Menu" id="basic-nav-dropdown">
+                    {isAdmin && (
+                      <NavDropdown.Item href="#action/add_images">
+                        Add images
+                      </NavDropdown.Item>
+                    )}
+                    <NavDropdown.Item href="">Info</NavDropdown.Item>
                   </NavDropdown>
                 </Nav>
               </Navbar.Collapse>
