@@ -28,7 +28,6 @@ function Login({ onLoginSuccess }) {
       }
     } catch (error) {
       console.error("Error:", error);
-      alert("An error occurred");
     }
   };
   return (

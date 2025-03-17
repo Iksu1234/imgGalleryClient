@@ -1,11 +1,21 @@
+import { useState } from "react";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
+import AddImage from "./addImage";
 
 // eslint-disable-next-line react/prop-types
 function Header({ isAdmin }) {
+  const [isOpen, setOpen] = useState(false);
+
+  const handleModal = () => {
+    if (isOpen) {
+      setOpen(false);
+    }
+  };
+
   return (
     <>
       <Navbar
@@ -15,7 +25,7 @@ function Header({ isAdmin }) {
       >
         <Row className="w-100">
           <Col>
-            <div className="float-start mx-3">
+            <div className="float-start mx-5 w-50">
               <img
                 alt=""
                 src="https://react-bootstrap.netlify.app/img/logo.svg"
@@ -32,12 +42,12 @@ function Header({ isAdmin }) {
           </Col>
           <Col>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
-            <div className="float-end mx-3">
+            <div className="float-end mx-5 w-50">
               <Navbar.Collapse id="basic-navbar-nav">
                 <Nav className="me-auto">
                   <NavDropdown title="Menu" id="basic-nav-dropdown">
                     {isAdmin && (
-                      <NavDropdown.Item href="#action/add_images">
+                      <NavDropdown.Item onClick={setOpen}>
                         Add images
                       </NavDropdown.Item>
                     )}
@@ -49,6 +59,7 @@ function Header({ isAdmin }) {
           </Col>
         </Row>
       </Navbar>
+      <AddImage show={isOpen} handleClose={handleModal} />
     </>
   );
 }
