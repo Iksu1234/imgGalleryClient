@@ -71,3 +71,6 @@ button:focus-visible {
 .img-box {
   margin: 10px;
 }
+.header-font {
+  font-family: Arial, Helvetica, sans-serif;
+}
