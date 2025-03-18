@@ -5,14 +5,21 @@ import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import AddImage from "./addImage";
+import DeleteImage from "./deleteImage";
 
 // eslint-disable-next-line react/prop-types
-function Header({ isAdmin }) {
-  const [isOpen, setOpen] = useState(false);
+function Header({ isAdmin, triggerRefresh, images }) {
+  const [isOpenAdd, setOpenAdd] = useState(false);
+  const [isOpenDel, setOpenDel] = useState(false);
 
-  const handleModal = () => {
-    if (isOpen) {
-      setOpen(false);
+  const handleAddModal = () => {
+    if (isOpenAdd) {
+      setOpenAdd(false);
+    }
+  };
+  const handleDelModal = () => {
+    if (isOpenDel) {
+      setOpenDel(false);
     }
   };
 
@@ -47,8 +54,13 @@ function Header({ isAdmin }) {
                 <Nav className="me-auto">
                   <NavDropdown title="Menu" id="basic-nav-dropdown">
                     {isAdmin && (
-                      <NavDropdown.Item onClick={setOpen}>
+                      <NavDropdown.Item onClick={setOpenAdd}>
                         Add images
+                      </NavDropdown.Item>
+                    )}
+                    {isAdmin && (
+                      <NavDropdown.Item onClick={setOpenDel}>
+                        Delete images
                       </NavDropdown.Item>
                     )}
                     <NavDropdown.Item href="">Info</NavDropdown.Item>
@@ -59,7 +71,17 @@ function Header({ isAdmin }) {
           </Col>
         </Row>
       </Navbar>
-      <AddImage show={isOpen} handleClose={handleModal} />
+      <AddImage
+        show={isOpenAdd}
+        handleClose={handleAddModal}
+        triggerRefresh={triggerRefresh}
+      />
+      <DeleteImage
+        show={isOpenDel}
+        handleClose={handleDelModal}
+        triggerRefresh={triggerRefresh}
+        images={images}
+      />
     </>
   );
 }

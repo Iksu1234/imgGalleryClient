@@ -1,6 +1,6 @@
 const API_URL = import.meta.env.VITE_URL;
 
-//Get images data from api
+//GET images data from api
 export const fetchImages = async () => {
   try {
     const response = await fetch(API_URL + "/images");
@@ -28,6 +28,27 @@ export const patchRatings = async (ratings) => {
     });
   } catch (error) {
     error.message = "Failed to send ratings";
+  }
+};
+
+//PATCH images to api
+export const patchImages = async (images) => {
+  try {
+    await fetch(API_URL + "/images", {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(images),
+    }).then((response) => {
+      if (!response.ok) {
+        throw new Error("Failed to patch images");
+      } else {
+        alert("Images patched successfully");
+      }
+    });
+  } catch (error) {
+    error.message = "Failed to patch images";
   }
 };
 

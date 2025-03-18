@@ -1,40 +1,79 @@
-//import { useRef } from "react";
+import { useState, useEffect } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Modal from "react-bootstrap/Modal";
+import ImageForm from "../../models/imageForm.js";
+import { patchImages } from "../services/apiService";
 
 // eslint-disable-next-line react/prop-types
-function AddImage({ show, handleClose }) {
+function AddImage({ show, handleClose, triggerRefresh }) {
+  const [linkInputs, setLinkInputs] = useState(["linkInput"]);
+  const [name, setName] = useState("");
+
+  const addRow = () => {
+    const newInputId = `linkInput${linkInputs.length + 1}`;
+    setLinkInputs([...linkInputs, newInputId]);
+  };
+  const tryAddImages = async () => {
+    try {
+      const links = linkInputs.map((id) => document.getElementById(id).value);
+      const imageForm = new ImageForm(name, links);
+      const result = await patchImages(imageForm);
+      console.log("Images add result: ", result);
+
+      triggerRefresh();
+      handleClose();
+    } catch (error) {
+      console.error("Error adding images: ", error);
+    }
+  };
+
+  useEffect(() => {
+    if (!show) {
+      setName("");
+      setLinkInputs(["linkInput"]);
+    }
+  }, [show]);
+
   return (
     <>
-      <Modal show={show} onHide={handleClose}>
+      <Modal show={show} onHide={handleClose} style={{ color: "black" }}>
         <Modal.Header closeButton>
-          <Modal.Title>Modal heading</Modal.Title>
+          <Modal.Title>Add Images</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <Form className="mt-3 mb-3">
-            <Form.Group className="mb-3 w-25 mx-auto" controlId="formBasicText">
-              <Form.Label>Name</Form.Label>
-              <Form.Control type="name" placeholder="name" />
-              <Form.Text className="text-muted"></Form.Text>
+          <Form>
+            <Form.Group className="mb-3" controlId="nameInput">
+              <Form.Control
+                type="text"
+                placeholder="Name"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+              />
             </Form.Group>
-            <Form.Group className="mb-3 w-25 mx-auto" controlId="formBasicText">
-              <Form.Label>Link</Form.Label>
-              <Form.Control type="link" placeholder="link" />
-            </Form.Group>
-            <Button variant="primary" type="submit">
-              Submit
-            </Button>
+            {linkInputs.map((id, index) => (
+              <Form.Group key={id} className="mb-3" controlId={id}>
+                <Form.Control type="text" placeholder={`Link ${index + 1}`} />
+              </Form.Group>
+            ))}
           </Form>
+          <Button
+            onClick={addRow}
+            variant="secondary"
+            type="add"
+            className="mx-auto float-start"
+          >
+            Add row
+          </Button>
+          <Button
+            onClick={tryAddImages}
+            variant="primary"
+            type="submit"
+            className="w-25 mx-auto float-end"
+          >
+            Submit
+          </Button>
         </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
-            Close
-          </Button>
-          <Button variant="primary" onClick={handleClose}>
-            Save Changes
-          </Button>
-        </Modal.Footer>
       </Modal>
     </>
   );

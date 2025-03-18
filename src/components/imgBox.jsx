@@ -4,29 +4,15 @@ import Stack from "react-bootstrap/Stack";
 import Image from "react-bootstrap/Image";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
-import { useState, useEffect } from "react";
-import { fetchImages, patchRatings } from "../services/apiService";
+import { patchRatings } from "../services/apiService";
 
-function ImgBox() {
-  const [jsonData, setJsonData] = useState({ images: [] });
-
-  async function getImageData() {
-    try {
-      const response = await fetchImages();
-      setJsonData(response);
-    } catch (error) {
-      console.error(error.message);
-    }
-  }
-
-  useEffect(() => {
-    getImageData();
-  }, []);
-
+// eslint-disable-next-line react/prop-types
+function ImgBox({ images }) {
+  const imageList = images;
   return (
     <>
       <Container className="pageWrapper">
-        {jsonData.images.map((image, index) => (
+        {imageList.images.map((image, index) => (
           <Stack key={`d${index}`} gap={3} className="mb-4">
             <h2>{image.desc}</h2>
             <Stack direction="horizontal" gap={3} className="imageWrapper">
@@ -34,7 +20,7 @@ function ImgBox() {
                 <div key={`z${linkIndex}`} className="img-box">
                   <Zoom>
                     <Image
-                      src={link.imageLink}
+                      src={link}
                       fluid
                       rounded
                       alt={`${image.person} - ${image.desc}`}
@@ -69,7 +55,7 @@ function ImgBox() {
   );
   function sendRatings() {
     const ratings = [];
-    for (let i = 0; i < jsonData.images.length; i++) {
+    for (let i = 0; i < imageList.length; i++) {
       const rating = Number(document.getElementById(`r${i}`).value);
       if (rating < 1 || rating > 10 || isNaN(rating)) {
         alert("Ratings must be between 1 and 10");
