@@ -33,20 +33,30 @@ function Login({ onLoginSuccess }) {
   return (
     <Form className="mt-3 mb-3" onSubmit={handleSubmit}>
       <Form.Group className="mb-3 w-25 mx-auto" controlId="formBasicEmail">
-        <Form.Label>Account</Form.Label>
-        <Form.Control ref={accountRef} type="account" placeholder="Account" />
+        <Form.Label className="text-shadow">
+          <strong>Account</strong>
+        </Form.Label>
+        <Form.Control
+          ref={accountRef}
+          type="account"
+          placeholder="Account"
+          className="box-shadow"
+        />
         <Form.Text className="text-muted"></Form.Text>
       </Form.Group>
 
       <Form.Group className="mb-3 w-25 mx-auto" controlId="formBasicPassword">
-        <Form.Label>Password</Form.Label>
+        <Form.Label className="text-shadow">
+          <strong>Password</strong>
+        </Form.Label>
         <Form.Control
           ref={passwordRef}
           type="password"
           placeholder="Password"
+          className="box-shadow"
         />
       </Form.Group>
-      <Button variant="primary" type="submit">
+      <Button variant="info" type="submit" className="box-shadow">
         Submit
       </Button>
     </Form>

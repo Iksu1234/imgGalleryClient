@@ -13,13 +13,16 @@ function ImgBox({ images }) {
       <Container className="pageWrapper">
         {imageList.images.map((image, index) => (
           <Stack key={`d${index}`} gap={3} className="mb-4">
-            <h2>{image.desc}</h2>
+            <h2 className="text-shadow">
+              <strong>{image.desc}</strong>
+            </h2>
             <Stack direction="horizontal" gap={3} className="imageWrapper">
               {image.imageLinks.map((link, linkIndex) => (
                 <div key={`z${linkIndex}`} className="img-box">
                   <Zoom>
                     <Image
                       src={link}
+                      className="box-shadow"
                       fluid
                       rounded
                       alt={`${image.person} - ${image.desc}`}
@@ -28,7 +31,7 @@ function ImgBox({ images }) {
                 </div>
               ))}
             </Stack>
-            <Form className="w-25 mx-auto">
+            <Form className="w-25 mx-auto box-shadow">
               <Form.Control
                 key={`r${index}`}
                 id={`r${index}`}
@@ -43,7 +46,7 @@ function ImgBox({ images }) {
         ))}
         <Button
           variant="primary"
-          className="w-25 mx-auto"
+          className="w-25 mx-auto box-shadow"
           type="submit"
           onClick={sendRatings}
         >
@@ -54,7 +57,7 @@ function ImgBox({ images }) {
   );
   function sendRatings() {
     const ratings = [];
-    for (let i = 0; i < imageList.length; i++) {
+    for (let i = 0; i < imageList.images.length; i++) {
       const rating = Number(document.getElementById(`r${i}`).value);
       if (rating < 1 || rating > 10 || isNaN(rating)) {
         alert("Ratings must be between 1 and 10");
@@ -64,6 +67,7 @@ function ImgBox({ images }) {
       }
     }
     try {
+      console.log("ratings: " + ratings);
       patchRatings(ratings);
     } catch (error) {
       error.message = "Failed to send ratings";

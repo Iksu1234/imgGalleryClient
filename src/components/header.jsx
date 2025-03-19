@@ -7,6 +7,8 @@ import NavDropdown from "react-bootstrap/NavDropdown";
 import AddImage from "./addImage";
 import DeleteImage from "./deleteImage";
 import Info from "./info";
+import NavbarBrand from "react-bootstrap/esm/NavbarBrand";
+import Button from "react-bootstrap/Button";
 
 function Header({ isAdmin, triggerRefresh, images }) {
   const [isOpenAdd, setOpenAdd] = useState(false);
@@ -26,49 +28,57 @@ function Header({ isAdmin, triggerRefresh, images }) {
   return (
     <>
       <Navbar
-        expand="lg"
-        className="jumbotron bg-primary full-width-header header-font"
+        expand="md"
+        className="jumbotron bg-transparent full-width-header header-font d-flex align-items-center justify-content-center text-center"
         style={{ height: "10vh" }}
       >
         <Row className="w-100">
-          <Col>
-            <div className="float-start mx-5 w-50">
+          <Col className="d-flex align-items-center justify-content-center">
+            <NavbarBrand
+              className="float-start mx-5"
+              href="https://react-bootstrap.netlify.app/"
+            >
               <img
                 alt=""
                 src="https://react-bootstrap.netlify.app/img/logo.svg"
                 width="45"
                 height="45"
-                className="d-inline-block align-top"
+                className="d-inline-block align-top svg-shadow"
               />
-            </div>
+            </NavbarBrand>
           </Col>
-          <Col>
-            <Navbar.Brand className="m-0">
-              <h2>Image Gallery</h2>
+          <Col className="d-flex align-items-center justify-content-center">
+            <Navbar.Brand className="mx-auto mt-25">
+              <h2 className="text-info text-shadow">
+                <strong>Image Gallery</strong>
+              </h2>
             </Navbar.Brand>
           </Col>
-          <Col>
-            <Navbar.Toggle aria-controls="basic-navbar-nav" />
-            <div className="float-end mx-5 w-50">
-              <Navbar.Collapse id="basic-navbar-nav">
-                <Nav className="me-auto">
-                  <NavDropdown title="asd" id="basic-nav-dropdown">
-                    {isAdmin && (
-                      <NavDropdown.Item onClick={setOpenAdd}>
-                        Add images
-                      </NavDropdown.Item>
-                    )}
-                    {isAdmin && (
-                      <NavDropdown.Item onClick={setOpenDel}>
-                        Delete images
-                      </NavDropdown.Item>
-                    )}
-                    <NavDropdown.Item onClick={setOpenInfo}>
-                      Info
+          <Col className="d-flex align-items-center justify-content-center">
+            <div className="float-end mx-5">
+              <Nav className="me-auto">
+                <NavDropdown
+                  title={
+                    <Button className="box-shadow" variant="info">
+                      Menu
+                    </Button>
+                  }
+                >
+                  {isAdmin && (
+                    <NavDropdown.Item onClick={setOpenAdd}>
+                      Add images
                     </NavDropdown.Item>
-                  </NavDropdown>
-                </Nav>
-              </Navbar.Collapse>
+                  )}
+                  {isAdmin && (
+                    <NavDropdown.Item onClick={setOpenDel}>
+                      Delete images
+                    </NavDropdown.Item>
+                  )}
+                  <NavDropdown.Item onClick={setOpenInfo}>
+                    Info
+                  </NavDropdown.Item>
+                </NavDropdown>
+              </Nav>
             </div>
           </Col>
         </Row>
