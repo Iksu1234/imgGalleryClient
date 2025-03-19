@@ -6,21 +6,21 @@ import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import AddImage from "./addImage";
 import DeleteImage from "./deleteImage";
+import Info from "./info";
 
-// eslint-disable-next-line react/prop-types
 function Header({ isAdmin, triggerRefresh, images }) {
   const [isOpenAdd, setOpenAdd] = useState(false);
   const [isOpenDel, setOpenDel] = useState(false);
+  const [isOpenInfo, setOpenInfo] = useState(false);
 
   const handleAddModal = () => {
-    if (isOpenAdd) {
-      setOpenAdd(false);
-    }
+    setOpenAdd(false);
   };
   const handleDelModal = () => {
-    if (isOpenDel) {
-      setOpenDel(false);
-    }
+    setOpenDel(false);
+  };
+  const handleInfoModal = () => {
+    setOpenInfo(false);
   };
 
   return (
@@ -36,8 +36,8 @@ function Header({ isAdmin, triggerRefresh, images }) {
               <img
                 alt=""
                 src="https://react-bootstrap.netlify.app/img/logo.svg"
-                width="40"
-                height="40"
+                width="45"
+                height="45"
                 className="d-inline-block align-top"
               />
             </div>
@@ -52,7 +52,7 @@ function Header({ isAdmin, triggerRefresh, images }) {
             <div className="float-end mx-5 w-50">
               <Navbar.Collapse id="basic-navbar-nav">
                 <Nav className="me-auto">
-                  <NavDropdown title="Menu" id="basic-nav-dropdown">
+                  <NavDropdown title="asd" id="basic-nav-dropdown">
                     {isAdmin && (
                       <NavDropdown.Item onClick={setOpenAdd}>
                         Add images
@@ -63,7 +63,9 @@ function Header({ isAdmin, triggerRefresh, images }) {
                         Delete images
                       </NavDropdown.Item>
                     )}
-                    <NavDropdown.Item href="">Info</NavDropdown.Item>
+                    <NavDropdown.Item onClick={setOpenInfo}>
+                      Info
+                    </NavDropdown.Item>
                   </NavDropdown>
                 </Nav>
               </Navbar.Collapse>
@@ -80,7 +82,12 @@ function Header({ isAdmin, triggerRefresh, images }) {
         show={isOpenDel}
         handleClose={handleDelModal}
         triggerRefresh={triggerRefresh}
-        images={images}
+        imagesData={images}
+      />
+      <Info
+        show={isOpenInfo}
+        handleClose={handleInfoModal}
+        triggerRefresh={triggerRefresh}
       />
     </>
   );

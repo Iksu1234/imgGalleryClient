@@ -6,7 +6,6 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import { patchRatings } from "../services/apiService";
 
-// eslint-disable-next-line react/prop-types
 function ImgBox({ images }) {
   const imageList = images;
   return (

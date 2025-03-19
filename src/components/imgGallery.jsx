@@ -7,7 +7,6 @@ import { fetchImages } from "../services/apiService";
 function ImgGallery() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
-  const [refreshTrigger, setRefreshTrigger] = useState(0);
   const [images, setImages] = useState({ images: [] });
 
   const handleLoginSuccess = (adminStatus) => {
@@ -15,14 +14,15 @@ function ImgGallery() {
     setIsAdmin(adminStatus);
   };
 
-  const triggerRefresh = () => {
-    setRefreshTrigger((prev) => prev + 1);
+  const triggerRefresh = async () => {
+    console.log("trigger refresh");
+    getImageData();
   };
 
   async function getImageData() {
     try {
       const response = await fetchImages();
-      console.log(response);
+      console.log("fetch images result: " + JSON.stringify(response));
       setImages(response);
     } catch (error) {
       console.error(error.message);
@@ -41,7 +41,7 @@ function ImgGallery() {
         images={images}
       />
       {!isLoggedIn && <Login onLoginSuccess={handleLoginSuccess} />}
-      {isLoggedIn && <ImgBox key={refreshTrigger} images={images} />}
+      {isLoggedIn && <ImgBox images={images} />}
     </>
   );
 }

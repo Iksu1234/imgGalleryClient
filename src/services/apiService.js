@@ -10,6 +10,27 @@ export const fetchImages = async () => {
   }
 };
 
+//DELETE images from api
+export const deleteImages = async (images) => {
+  try {
+    fetch(API_URL + "/images", {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(images),
+    }).then((response) => {
+      if (!response.ok) {
+        throw new Error("Failed to delete images");
+      } else {
+        alert("Images deleted successfully");
+      }
+    });
+  } catch (error) {
+    error.message = "Failed to delete images";
+  }
+};
+
 //PATCH ratings to api
 export const patchRatings = async (ratings) => {
   try {

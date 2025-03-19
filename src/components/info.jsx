@@ -1,0 +1,24 @@
+import { useEffect } from "react";
+import Modal from "react-bootstrap/Modal";
+import Button from "react-bootstrap/Button";
+
+function Info({ show, handleClose }) {
+  useEffect(() => {}, [show]);
+  return (
+    <Modal show={show} onHide={handleClose} style={{ color: "black" }}>
+      <Modal.Header closeButton>
+        <Modal.Title>Info</Modal.Title>
+      </Modal.Header>
+      <Modal.Body>
+        <p>Image gallery app made with vite react, bootstrap and express.js</p>
+        <p>https://github.com/Iksu1234</p>
+      </Modal.Body>
+      <Modal.Footer>
+        <Button variant="secondary" onClick={handleClose}>
+          Close
+        </Button>
+      </Modal.Footer>
+    </Modal>
+  );
+}
+export default Info;

@@ -5,7 +5,6 @@ import Modal from "react-bootstrap/Modal";
 import ImageForm from "../../models/imageForm.js";
 import { patchImages } from "../services/apiService";
 
-// eslint-disable-next-line react/prop-types
 function AddImage({ show, handleClose, triggerRefresh }) {
   const [linkInputs, setLinkInputs] = useState(["linkInput"]);
   const [name, setName] = useState("");
@@ -14,12 +13,12 @@ function AddImage({ show, handleClose, triggerRefresh }) {
     const newInputId = `linkInput${linkInputs.length + 1}`;
     setLinkInputs([...linkInputs, newInputId]);
   };
+
   const tryAddImages = async () => {
     try {
       const links = linkInputs.map((id) => document.getElementById(id).value);
       const imageForm = new ImageForm(name, links);
-      const result = await patchImages(imageForm);
-      console.log("Images add result: ", result);
+      await patchImages(imageForm);
 
       triggerRefresh();
       handleClose();
