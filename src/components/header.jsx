@@ -9,11 +9,13 @@ import DeleteImage from "./deleteImage";
 import Info from "./info";
 import NavbarBrand from "react-bootstrap/esm/NavbarBrand";
 import Button from "react-bootstrap/Button";
+import ShowRatings from "./showRatings";
 
-function Header({ isAdmin, triggerRefresh, images }) {
+function Header({ isAdmin, triggerRefresh, images, ratingsData }) {
   const [isOpenAdd, setOpenAdd] = useState(false);
   const [isOpenDel, setOpenDel] = useState(false);
   const [isOpenInfo, setOpenInfo] = useState(false);
+  const [isOpenRatings, setOpenRatings] = useState(false);
 
   const handleAddModal = () => {
     setOpenAdd(false);
@@ -23,6 +25,9 @@ function Header({ isAdmin, triggerRefresh, images }) {
   };
   const handleInfoModal = () => {
     setOpenInfo(false);
+  };
+  const handleRatingModal = () => {
+    setOpenRatings(false);
   };
 
   return (
@@ -74,6 +79,11 @@ function Header({ isAdmin, triggerRefresh, images }) {
                       Delete images
                     </NavDropdown.Item>
                   )}
+                  {isAdmin && (
+                    <NavDropdown.Item onClick={setOpenRatings}>
+                      Image ratings
+                    </NavDropdown.Item>
+                  )}
                   <NavDropdown.Item onClick={setOpenInfo}>
                     Info
                   </NavDropdown.Item>
@@ -93,6 +103,12 @@ function Header({ isAdmin, triggerRefresh, images }) {
         handleClose={handleDelModal}
         triggerRefresh={triggerRefresh}
         imagesData={images}
+      />
+      <ShowRatings
+        show={isOpenRatings}
+        handleClose={handleRatingModal}
+        imagesData={images}
+        ratingsData={ratingsData}
       />
       <Info
         show={isOpenInfo}

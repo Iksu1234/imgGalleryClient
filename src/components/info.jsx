@@ -11,7 +11,7 @@ function Info({ show, handleClose }) {
       </Modal.Header>
       <Modal.Body>
         <p>Image gallery app made with vite react, bootstrap and express.js</p>
-        <p>https://github.com/Iksu1234</p>
+        <a href="https://github.com/Iksu1234">Github</a>
       </Modal.Body>
       <Modal.Footer>
         <Button variant="secondary" onClick={handleClose}>

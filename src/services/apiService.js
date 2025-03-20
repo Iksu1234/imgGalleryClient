@@ -10,6 +10,16 @@ export const fetchImages = async () => {
   }
 };
 
+//GET ratings data from api
+export const fetchRatings = async () => {
+  try {
+    const response = await fetch(API_URL + "/ratings");
+    return response.json();
+  } catch (error) {
+    console.error(error.message);
+  }
+};
+
 //DELETE images from api
 export const deleteImages = async (images) => {
   try {

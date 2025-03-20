@@ -6,8 +6,8 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import { patchRatings } from "../services/apiService";
 
-function ImgBox({ images }) {
-  const imageList = images;
+function ImgBox({ imagesData }) {
+  const imageList = imagesData;
   return (
     <>
       <Container className="pageWrapper">
