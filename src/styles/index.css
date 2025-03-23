@@ -4,6 +4,7 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   --site-blue: #0dcaf0;
+  --site-blue-hover: #0c89a2;
   background: linear-gradient(90deg, #000863, #570000);
   height: 100vh;
   width: 100vw;
@@ -48,6 +49,10 @@ button {
   cursor: pointer;
   transition: border-color 0.25s;
   color: var(--site-blue);
+  --bs-btn-hover-color: rgb(0, 0, 0) !important;
+  --bs-btn-hover-bg: var(--site-blue-hover) !important;
+  --bs-btn-active-bg: var(--site-blue-hover) !important;
+  --bs-btn-active-color: white !important;
 }
 button:hover {
   border-color: #646cff;
@@ -79,7 +84,7 @@ button:focus-visible {
 
 .pageWrapper {
   display: flex;
-  background-color: #38050500;
+  background-color: #00000000;
   flex-direction: column;
   border-radius: var(--bs-border-radius);
 }
@@ -120,4 +125,13 @@ button:focus-visible {
 
 .svg-shadow {
   filter: drop-shadow(7px 7px black);
+}
+
+.dropdown-menu.show {
+  --bs-dropdown-link-hover-bg: var(--site-blue);
+  --bs-dropdown-link-active-bg: var(--site-blue-hover);
+}
+
+.dropdown-menu[data-bs-popper] {
+  left: -100% !important;
 }

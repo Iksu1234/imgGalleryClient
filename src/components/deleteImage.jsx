@@ -38,7 +38,11 @@ function DeleteImage({ show, handleClose, triggerRefresh, imagesData }) {
     }
   };
 
-  useEffect(() => {}, [show]);
+  useEffect(() => {
+    if (!show) {
+      setCheckedBoxes([]);
+    }
+  }, [show]);
   return (
     <>
       <Modal show={show} onHide={handleClose} style={{ color: "black" }}>
