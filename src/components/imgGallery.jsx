@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import ImgBox from "./imgBox";
 import Login from "./login";
 import Header from "./header";
+import Footer from "./footer";
 import { fetchImages, fetchRatings } from "../services/apiService";
 
 function ImgGallery() {
@@ -53,14 +54,17 @@ function ImgGallery() {
 
   return (
     <>
-      <Header
-        isAdmin={isAdmin}
-        triggerRefresh={triggerRefresh}
-        images={imagesData}
-        ratingsData={ratingsData}
-      />
-      {!isLoggedIn && <Login onLoginSuccess={handleLoginSuccess} />}
-      {isLoggedIn && <ImgBox imagesData={imagesData} />}
+      <div>
+        <Header
+          isAdmin={isAdmin}
+          triggerRefresh={triggerRefresh}
+          images={imagesData}
+          ratingsData={ratingsData}
+        />
+        {!isLoggedIn && <Login onLoginSuccess={handleLoginSuccess} />}
+        {isLoggedIn && <ImgBox imagesData={imagesData} />}
+      </div>
+      <Footer isLoggedIn={isLoggedIn} />
     </>
   );
 }

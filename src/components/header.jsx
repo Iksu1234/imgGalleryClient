@@ -44,7 +44,7 @@ function Header({ isAdmin, triggerRefresh, images, ratingsData }) {
               href="https://react-bootstrap.netlify.app/"
             >
               <img
-                alt=""
+                alt="react-bootstrap logo"
                 src="https://react-bootstrap.netlify.app/img/logo.svg"
                 width="45"
                 height="45"
@@ -55,7 +55,7 @@ function Header({ isAdmin, triggerRefresh, images, ratingsData }) {
           <Col className="d-flex align-items-center justify-content-center">
             <Navbar.Brand className="mx-auto mt-25">
               <h2 className="text-info text-shadow">
-                <strong>Image Gallery</strong>
+                <strong>imgGallery</strong>
               </h2>
             </Navbar.Brand>
           </Col>

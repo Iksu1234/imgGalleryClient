@@ -1,10 +1,10 @@
 :root {
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: sans-serif;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   --site-blue: #0dcaf0;
-  background: linear-gradient(90deg, #5f0f40, #310e68);
+  background: linear-gradient(90deg, #000863, #570000);
   height: 100vh;
   width: 100vw;
 }
@@ -14,8 +14,13 @@ a {
   color: #646cff;
   text-decoration: inherit;
 }
+
+strong {
+  color: var(--site-blue);
+}
+
 a:hover {
-  color: #535bf2;
+  color: var(--site-blue);
 }
 
 body {
@@ -42,6 +47,7 @@ button {
   background-color: #1a1a1a;
   cursor: pointer;
   transition: border-color 0.25s;
+  color: var(--site-blue);
 }
 button:hover {
   border-color: #646cff;
@@ -52,16 +58,28 @@ button:focus-visible {
 }
 
 .header {
-  width: 100%;
-  background-color: blue;
-  color: white;
-  padding: 20px;
+  background-color: rgba(125, 66, 66, 0.366);
+}
+
+.footer {
+  width: 100vw;
+  margin-left: calc(-50vw + 50%);
   text-align: center;
+  padding: 20px 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin-top: 100px;
+  background-image: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.77),
+    rgba(0, 0, 0, 0)
+  );
 }
 
 .pageWrapper {
   display: flex;
-  background-color: #3600002d;
+  background-color: #38050500;
   flex-direction: column;
   border-radius: var(--bs-border-radius);
 }
@@ -76,7 +94,7 @@ button:focus-visible {
   margin: 10px;
 }
 .header-font {
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: sans-serif;
 }
 
 .bg-transparent {

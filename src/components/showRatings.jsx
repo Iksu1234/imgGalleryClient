@@ -20,7 +20,8 @@ function ShowRatings({ show, handleClose, imagesData, ratingsData }) {
                 <ListGroup.Item key={index} variant="success" className="mb-2">
                   {image.desc}
                   <p className="float-end">
-                    Rating result mean: {ratingsData[index] || "No ratings yet"}
+                    Rating result mean:{" "}
+                    <strong>{ratingsData[index] || "No ratings yet"}</strong>
                   </p>
                 </ListGroup.Item>
               </Form>

@@ -4,55 +4,75 @@ import Stack from "react-bootstrap/Stack";
 import Image from "react-bootstrap/Image";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
+import Spinner from "react-bootstrap/Spinner";
 import { patchRatings } from "../services/apiService";
+import { useEffect, useState } from "react";
 
 function ImgBox({ imagesData }) {
+  const [hasLoaded, setLoaded] = useState(false);
   const imageList = imagesData;
+
+  useEffect(() => {
+    if (imageList != null) {
+      setLoaded(true);
+    }
+  }, [imageList]);
   return (
     <>
-      <Container className="pageWrapper">
-        {imageList.images.map((image, index) => (
-          <Stack key={`d${index}`} gap={3} className="mb-4">
-            <h2 className="text-shadow">
-              <strong>{image.desc}</strong>
-            </h2>
-            <Stack direction="horizontal" gap={3} className="imageWrapper">
-              {image.imageLinks.map((link, linkIndex) => (
-                <div key={`z${linkIndex}`} className="img-box">
-                  <Zoom>
-                    <Image
-                      src={link}
-                      className="box-shadow"
-                      fluid
-                      rounded
-                      alt={`${image.person} - ${image.desc}`}
-                    />
-                  </Zoom>
-                </div>
-              ))}
-            </Stack>
-            <Form className="w-25 mx-auto box-shadow">
-              <Form.Control
-                key={`r${index}`}
-                id={`r${index}`}
-                type="number"
-                min={1}
-                max={10}
-                step={0.1}
-                placeholder="rating 1-10"
-              />
-            </Form>
-          </Stack>
-        ))}
-        <Button
-          variant="primary"
-          className="w-25 mx-auto box-shadow"
-          type="submit"
-          onClick={sendRatings}
+      {!hasLoaded && (
+        <Spinner
+          animation="border"
+          variant="info"
+          style={{ marginBottom: "80vh", marginTop: "40vh" }}
         >
-          Submit
-        </Button>
-      </Container>
+          <span className="visually-hidden">Loading...</span>
+        </Spinner>
+      )}
+      {hasLoaded && (
+        <Container className="pageWrapper">
+          {imageList.images.map((image, index) => (
+            <Stack key={`d${index}`} gap={3} className="mb-4">
+              <h2 className="text-shadow">
+                <strong>{image.desc}</strong>
+              </h2>
+              <Stack direction="horizontal" gap={3} className="imageWrapper">
+                {image.imageLinks.map((link, linkIndex) => (
+                  <div key={`z${linkIndex}`} className="img-box">
+                    <Zoom>
+                      <Image
+                        src={link}
+                        className="box-shadow"
+                        fluid
+                        rounded
+                        alt={`${image.person} - ${image.desc}`}
+                      />
+                    </Zoom>
+                  </div>
+                ))}
+              </Stack>
+              <Form className="w-25 mx-auto box-shadow">
+                <Form.Control
+                  key={`r${index}`}
+                  id={`r${index}`}
+                  type="number"
+                  min={1}
+                  max={10}
+                  step={0.1}
+                  placeholder="rating 1-10"
+                />
+              </Form>
+            </Stack>
+          ))}
+          <Button
+            variant="info"
+            className="w-25 mx-auto box-shadow"
+            type="submit"
+            onClick={sendRatings}
+          >
+            Submit
+          </Button>
+        </Container>
+      )}
     </>
   );
   function sendRatings() {
