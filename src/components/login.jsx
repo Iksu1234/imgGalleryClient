@@ -3,7 +3,6 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import { postLogin } from "../services/apiService";
 
-// eslint-disable-next-line react/prop-types
 function Login({ onLoginSuccess }) {
   const passwordRef = useRef(null);
   const accountRef = useRef(null);

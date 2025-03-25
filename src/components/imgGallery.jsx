@@ -3,13 +3,19 @@ import ImgBox from "./imgBox";
 import Login from "./login";
 import Header from "./header";
 import Footer from "./footer";
-import { fetchImages, fetchRatings } from "../services/apiService";
+import History from "./history";
+import {
+  fetchImages,
+  fetchRatings,
+  fetchHistory,
+} from "../services/apiService";
 
 function ImgGallery() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
   const [imagesData, setImagesData] = useState({ images: [] });
   const [ratingsData, setRatingsData] = useState({ ratings: [] });
+  const [historyData, setHistoryData] = useState({ months: [] });
 
   const handleLoginSuccess = (adminStatus) => {
     setIsLoggedIn(true);
@@ -35,13 +41,17 @@ function ImgGallery() {
       const response = await fetchRatings();
       console.log("fetch ratings result: " + JSON.stringify(response));
 
-      const ratingsMeans = response.map((ratingArray) => {
-        const sum = ratingArray.reduce((acc, value) => acc + value, 0);
-        const calc = sum / ratingArray.length;
-        return calc.toFixed(2);
-      });
+      setRatingsData(response);
+    } catch (error) {
+      console.error(error.message);
+    }
+  };
+  const getHistoryData = async () => {
+    try {
+      const response = await fetchHistory();
+      console.log("fetch history result: " + JSON.stringify(response));
 
-      setRatingsData(ratingsMeans);
+      setHistoryData(response);
     } catch (error) {
       console.error(error.message);
     }
@@ -50,6 +60,7 @@ function ImgGallery() {
   useEffect(() => {
     getImageData();
     getRatingData();
+    getHistoryData();
   }, []);
 
   return (
@@ -62,6 +73,7 @@ function ImgGallery() {
           ratingsData={ratingsData}
         />
         {!isLoggedIn && <Login onLoginSuccess={handleLoginSuccess} />}
+        {isLoggedIn && <History historyData={historyData} />}
         {isLoggedIn && <ImgBox imagesData={imagesData} />}
       </div>
       <Footer isLoggedIn={isLoggedIn} />

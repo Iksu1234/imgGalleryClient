@@ -20,6 +20,16 @@ export const fetchRatings = async () => {
   }
 };
 
+//GET history data from api
+export const fetchHistory = async () => {
+  try {
+    const response = await fetch(API_URL + "/history");
+    return response.json();
+  } catch (error) {
+    console.error(error.message);
+  }
+};
+
 //DELETE images from api
 export const deleteImages = async (images) => {
   try {
