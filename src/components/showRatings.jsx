@@ -5,7 +5,6 @@ import ListGroup from "react-bootstrap/ListGroup";
 import Form from "react-bootstrap/Form";
 
 function ShowRatings({ show, handleClose, imagesData, ratingsData }) {
-  console.log(ratingsData);
   useEffect(() => {}, [show]);
 
   return (

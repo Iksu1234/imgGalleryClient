@@ -133,5 +133,16 @@ button:focus-visible {
 }
 
 .dropdown-menu[data-bs-popper] {
-  left: -100% !important;
+  left: -50% !important;
+}
+
+.bg-card {
+  background-color: #1a1a1a77;
+  border-radius: 8px;
+}
+.carousel-control-prev,
+.carousel-control-next {
+  height: 10%;
+  width: 10%;
+  margin-top: 12vh;
 }

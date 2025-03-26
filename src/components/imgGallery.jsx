@@ -4,6 +4,8 @@ import Login from "./login";
 import Header from "./header";
 import Footer from "./footer";
 import History from "./history";
+import ManualFade from "./manualFade";
+
 import {
   fetchImages,
   fetchRatings,
@@ -16,6 +18,7 @@ function ImgGallery() {
   const [imagesData, setImagesData] = useState({ images: [] });
   const [ratingsData, setRatingsData] = useState({ ratings: [] });
   const [historyData, setHistoryData] = useState({ months: [] });
+  const [visibleScreen, setVisibleScreen] = useState("current");
 
   const handleLoginSuccess = (adminStatus) => {
     setIsLoggedIn(true);
@@ -25,6 +28,11 @@ function ImgGallery() {
   const triggerRefresh = async () => {
     console.log("trigger refresh");
     getImageData();
+  };
+
+  const changeScreen = async (screen) => {
+    console.log("change screen: " + screen);
+    setVisibleScreen(screen);
   };
 
   const getImageData = async () => {
@@ -71,10 +79,16 @@ function ImgGallery() {
           triggerRefresh={triggerRefresh}
           images={imagesData}
           ratingsData={ratingsData}
+          changeScreen={changeScreen}
         />
         {!isLoggedIn && <Login onLoginSuccess={handleLoginSuccess} />}
-        {isLoggedIn && <History historyData={historyData} />}
-        {isLoggedIn && <ImgBox imagesData={imagesData} />}
+        <ManualFade in={isLoggedIn && visibleScreen === "history"}>
+          <History historyData={historyData} />
+        </ManualFade>
+
+        <ManualFade in={isLoggedIn && visibleScreen === "current"}>
+          <ImgBox imagesData={imagesData} />
+        </ManualFade>
       </div>
       <Footer isLoggedIn={isLoggedIn} />
     </>

@@ -29,7 +29,7 @@ function ImgBox({ imagesData }) {
         </Spinner>
       )}
       {hasLoaded && (
-        <Container className="pageWrapper">
+        <Container className="pageWrapper bg-card box-shadow mb-4">
           {imageList.images.map((image, index) => (
             <Stack key={`d${index}`} gap={3} className="mb-4">
               <h2 className="text-shadow">

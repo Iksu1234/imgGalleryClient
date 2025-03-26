@@ -11,7 +11,13 @@ import NavbarBrand from "react-bootstrap/esm/NavbarBrand";
 import Button from "react-bootstrap/Button";
 import ShowRatings from "./showRatings";
 
-function Header({ isAdmin, triggerRefresh, images, ratingsData }) {
+function Header({
+  isAdmin,
+  triggerRefresh,
+  images,
+  ratingsData,
+  changeScreen,
+}) {
   const [isOpenAdd, setOpenAdd] = useState(false);
   const [isOpenDel, setOpenDel] = useState(false);
   const [isOpenInfo, setOpenInfo] = useState(false);
@@ -38,7 +44,7 @@ function Header({ isAdmin, triggerRefresh, images, ratingsData }) {
         style={{ height: "10vh" }}
       >
         <Row className="w-100">
-          <Col className="d-flex align-items-left justify-content-left">
+          <Col className="d-flex align-items-center justify-content-center">
             <NavbarBrand>
               <Navbar.Brand className="mx-auto mt-25">
                 <h2 className="text-info text-shadow px-5">
@@ -50,12 +56,20 @@ function Header({ isAdmin, triggerRefresh, images, ratingsData }) {
           <Col className="d-flex align-items-center justify-content-center">
             <Nav variant="pills">
               <Nav.Item>
-                <Button className="box-shadow mx-2" variant="info">
+                <Button
+                  className="box-shadow mx-2"
+                  variant="info"
+                  onClick={() => changeScreen("current")}
+                >
                   Current
                 </Button>
               </Nav.Item>
               <Nav.Item>
-                <Button className="box-shadow mx-2" variant="info">
+                <Button
+                  className="box-shadow mx-2"
+                  variant="info"
+                  onClick={() => changeScreen("history")}
+                >
                   History
                 </Button>
               </Nav.Item>
