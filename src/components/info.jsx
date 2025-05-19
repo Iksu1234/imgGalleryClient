@@ -5,7 +5,12 @@ import Button from "react-bootstrap/Button";
 function Info({ show, handleClose }) {
   useEffect(() => {}, [show]);
   return (
-    <Modal show={show} onHide={handleClose} style={{ color: "black" }}>
+    <Modal
+      show={show}
+      onHide={handleClose}
+      backdrop="static"
+      style={{ color: "black" }}
+    >
       <Modal.Header closeButton>
         <Modal.Title>Info</Modal.Title>
       </Modal.Header>

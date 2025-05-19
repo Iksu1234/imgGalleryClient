@@ -4,7 +4,6 @@ import Login from "./login";
 import Header from "./header";
 import Footer from "./footer";
 import History from "./history";
-import ManualFade from "./manualFade";
 
 import {
   fetchImages,
@@ -66,10 +65,12 @@ function ImgGallery() {
   };
 
   useEffect(() => {
-    getImageData();
-    getRatingData();
-    getHistoryData();
-  }, []);
+    if (isLoggedIn) {
+      getImageData();
+      getRatingData();
+      getHistoryData();
+    }
+  }, [isLoggedIn]);
 
   return (
     <>
@@ -82,13 +83,12 @@ function ImgGallery() {
           changeScreen={changeScreen}
         />
         {!isLoggedIn && <Login onLoginSuccess={handleLoginSuccess} />}
-        <ManualFade in={isLoggedIn && visibleScreen === "history"}>
+        {isLoggedIn && visibleScreen === "history" && (
           <History historyData={historyData} />
-        </ManualFade>
-
-        <ManualFade in={isLoggedIn && visibleScreen === "current"}>
+        )}
+        {isLoggedIn && visibleScreen === "current" && (
           <ImgBox imagesData={imagesData} />
-        </ManualFade>
+        )}
       </div>
       <Footer isLoggedIn={isLoggedIn} />
     </>

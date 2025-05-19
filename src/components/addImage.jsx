@@ -36,7 +36,12 @@ function AddImage({ show, handleClose, triggerRefresh }) {
 
   return (
     <>
-      <Modal show={show} onHide={handleClose} style={{ color: "black" }}>
+      <Modal
+        show={show}
+        onHide={handleClose}
+        backdrop="static"
+        style={{ color: "black" }}
+      >
         <Modal.Header closeButton>
           <Modal.Title>Add Images</Modal.Title>
         </Modal.Header>

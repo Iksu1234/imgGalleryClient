@@ -45,7 +45,12 @@ function DeleteImage({ show, handleClose, triggerRefresh, imagesData }) {
   }, [show]);
   return (
     <>
-      <Modal show={show} onHide={handleClose} style={{ color: "black" }}>
+      <Modal
+        show={show}
+        onHide={handleClose}
+        backdrop="static"
+        style={{ color: "black" }}
+      >
         <Modal.Header closeButton>
           <Modal.Title>Delete Images</Modal.Title>
         </Modal.Header>

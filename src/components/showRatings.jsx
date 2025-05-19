@@ -9,9 +9,14 @@ function ShowRatings({ show, handleClose, imagesData, ratingsData }) {
 
   return (
     <>
-      <Modal show={show} onHide={handleClose} style={{ color: "black" }}>
+      <Modal
+        show={show}
+        onHide={handleClose}
+        backdrop="static"
+        style={{ color: "black" }}
+      >
         <Modal.Header closeButton>
-          <Modal.Title>Image ratings</Modal.Title>
+          <Modal.Title>Current month image ratings</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <ListGroup>

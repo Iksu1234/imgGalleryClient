@@ -8,9 +8,32 @@ import {
 } from "react-bootstrap";
 import { useState, useEffect } from "react";
 import Spinner from "react-bootstrap/Spinner";
+import HistoryDetails from "./historyDetails";
 
 function History({ historyData = { months: [] } }) {
   const [hasLoaded, setLoaded] = useState(false);
+  const [isOpenDetail, setOpenDetail] = useState(false);
+  const [monthIndex, setMonthIndex] = useState(0);
+  const [monthName, setMonthName] = useState("");
+
+  const handleDetailModal = () => {
+    setOpenDetail(false);
+  };
+
+  const openDetailModal = (monthIndex, monthName) => {
+    const monthData = historyData.months[monthIndex]?.[monthName]; // Access the specific month by name
+    if (!monthData) {
+      console.error("Invalid month index or name:", monthIndex, monthName);
+      return;
+    }
+
+    setMonthIndex(monthIndex); // Set the selected month index
+    setMonthName(monthName); // Set the selected month name
+    console.log("Opening details for month:", monthName, "Data:", monthData);
+
+    setOpenDetail(true); // Open the modal
+  };
+
   //const [shownMonths, setShownMonths] = useState([]);
 
   /*
@@ -31,6 +54,7 @@ function History({ historyData = { months: [] } }) {
     if (historyData != null) {
       setLoaded(true);
     }
+    console.log(historyData);
   }, [historyData]);
 
   return (
@@ -57,11 +81,10 @@ function History({ historyData = { months: [] } }) {
                     <strong>{monthName}</strong>
                   </h2>
                   <Carousel
-                    action
                     key={`${monthName}-${monthIndex}`}
                     className="mb-4"
                     interval={3000}
-                    fade={true}
+                    fade
                   >
                     {monthDetails.images.map((image, imageIndex) => (
                       <Carousel.Item key={`${image}-${imageIndex}`}>
@@ -93,11 +116,25 @@ function History({ historyData = { months: [] } }) {
                       </Carousel.Item>
                     ))}
                   </Carousel>
-                  <Button variant="info">Info</Button>
+                  <Button
+                    variant="info"
+                    className="box-shadow"
+                    onClick={() => openDetailModal(monthIndex, monthName)}
+                  >
+                    Details
+                  </Button>
                 </div>
               ))
             )}
           </ListGroup>
+          <HistoryDetails
+            show={isOpenDetail}
+            handleClose={handleDetailModal}
+            monthName={monthName || "placeholder"}
+            monthData={
+              historyData.months[monthIndex]?.[monthName] || { images: [] }
+            }
+          />
         </Container>
       )}
     </>

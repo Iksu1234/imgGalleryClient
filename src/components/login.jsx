@@ -30,8 +30,11 @@ function Login({ onLoginSuccess }) {
     }
   };
   return (
-    <Form className="mt-3 mb-3" onSubmit={handleSubmit}>
-      <Form.Group className="mb-3 w-25 mx-auto" controlId="formBasicEmail">
+    <Form
+      className="mt-5 mb-3 bg-card box-shadow login-form"
+      onSubmit={handleSubmit}
+    >
+      <Form.Group className="mb-3 w-50 mx-auto" controlId="formBasicEmail">
         <Form.Label className="text-shadow">
           <strong>Account</strong>
         </Form.Label>
@@ -44,7 +47,7 @@ function Login({ onLoginSuccess }) {
         <Form.Text className="text-muted"></Form.Text>
       </Form.Group>
 
-      <Form.Group className="mb-3 w-25 mx-auto" controlId="formBasicPassword">
+      <Form.Group className="mb-3 w-50 mx-auto" controlId="formBasicPassword">
         <Form.Label className="text-shadow">
           <strong>Password</strong>
         </Form.Label>

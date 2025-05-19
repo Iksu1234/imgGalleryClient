@@ -8,6 +8,7 @@
   background: linear-gradient(90deg, #000863, #570000);
   height: 100vh;
   width: 100vw;
+  overflow-x: hidden; /* Hide horizontal scrollbar WHY IS IT HERE*/
 }
 
 a {
@@ -80,6 +81,12 @@ button:focus-visible {
     rgba(0, 0, 0, 0.77),
     rgba(0, 0, 0, 0)
   );
+}
+
+.login-form {
+  width: 400px;
+  margin: 0 auto;
+  padding: 50px;
 }
 
 .pageWrapper {
