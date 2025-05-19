@@ -147,9 +147,20 @@ button:focus-visible {
   background-color: #1a1a1a77;
   border-radius: 8px;
 }
-.carousel-control-prev,
-.carousel-control-next {
+
+.carousel-history .carousel-control-prev,
+.carousel-history .carousel-control-next {
   height: 10%;
   width: 10%;
   margin-top: 12vh;
+}
+.carousel-history .carousel-control-prev-icon,
+.carousel-history .carousel-control-next-icon {
+  background-color: black;
+  border-radius: 50%;
+}
+.carousel-history-details .carousel-control-prev-icon,
+.carousel-history-details .carousel-control-next-icon {
+  background-color: black;
+  border-radius: 50%;
 }

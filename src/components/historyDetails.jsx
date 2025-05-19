@@ -32,7 +32,12 @@ function HistoryDetails({
           <ListGroup>
             {monthData.images.map((image, index) => (
               <Card key={index} className="imageWrapper mb-4">
-                <Carousel key={{ monthName }} interval={null} fade>
+                <Carousel
+                  key={{ monthName }}
+                  interval={null}
+                  fade
+                  className="carousel-history-details"
+                >
                   {monthData.images[index].imageLinks.map(
                     (imageLink, imageIndex) => (
                       <Carousel.Item key={`${imageLink}-${imageIndex}`}>
@@ -54,10 +59,12 @@ function HistoryDetails({
 
                 <Card.Body>
                   <Card.Title>{image.desc}</Card.Title>
-                  <Card.Text>placeholder</Card.Text>
+                  <Card.Text></Card.Text>
                   <ListGroup>
                     <ListGroup.Item>
-                      <strong>{image.rating}</strong>
+                      <p className="mt-2">
+                        Rating result mean: <strong>{image.rating}</strong>
+                      </p>
                     </ListGroup.Item>
                   </ListGroup>
                 </Card.Body>

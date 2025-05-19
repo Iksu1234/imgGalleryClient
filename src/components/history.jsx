@@ -82,7 +82,7 @@ function History({ historyData = { months: [] } }) {
                   </h2>
                   <Carousel
                     key={`${monthName}-${monthIndex}`}
-                    className="mb-4"
+                    className="mb-4 carousel-history"
                     interval={3000}
                     fade
                   >
