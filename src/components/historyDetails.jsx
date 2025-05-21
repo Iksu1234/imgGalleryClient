@@ -18,24 +18,19 @@ function HistoryDetails({
 
   return (
     <>
-      <Modal
-        show={show}
-        onHide={handleClose}
-        style={{ color: "black" }}
-        size="lg"
-        scrollable="true"
-      >
+      <Modal show={show} onHide={handleClose} size="lg" scrollable="true">
         <Modal.Header closeButton>
-          <Modal.Title>{monthName}</Modal.Title>
+          <Modal.Title>
+            <strong style={{ color: "black" }}>{monthName}</strong>
+          </Modal.Title>
         </Modal.Header>
-        <Modal.Body>
+        <Modal.Body className="mx-3">
           <ListGroup>
             {monthData.images.map((image, index) => (
               <Card key={index} className="imageWrapper mb-4">
                 <Carousel
                   key={{ monthName }}
                   interval={null}
-                  fade
                   className="carousel-history-details"
                 >
                   {monthData.images[index].imageLinks.map(

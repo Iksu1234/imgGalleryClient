@@ -83,8 +83,7 @@ function History({ historyData = { months: [] } }) {
                   <Carousel
                     key={`${monthName}-${monthIndex}`}
                     className="mb-4 carousel-history"
-                    interval={3000}
-                    fade
+                    interval={null}
                   >
                     {monthDetails.images.map((image, imageIndex) => (
                       <Carousel.Item key={`${image}-${imageIndex}`}>
@@ -117,7 +116,7 @@ function History({ historyData = { months: [] } }) {
                     ))}
                   </Carousel>
                   <Button
-                    variant="info"
+                    variant="secondary"
                     className="box-shadow"
                     onClick={() => openDetailModal(monthIndex, monthName)}
                   >

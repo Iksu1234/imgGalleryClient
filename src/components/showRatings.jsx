@@ -7,6 +7,13 @@ import Form from "react-bootstrap/Form";
 function ShowRatings({ show, handleClose, imagesData, ratingsData }) {
   useEffect(() => {}, [show]);
 
+  function shortenDesc(desc) {
+    if (desc.length > 27) {
+      return desc.substring(0, 27) + "...";
+    }
+    return desc;
+  }
+
   return (
     <>
       <Modal
@@ -23,10 +30,12 @@ function ShowRatings({ show, handleClose, imagesData, ratingsData }) {
             {imagesData.images.map((image, index) => (
               <Form key={index}>
                 <ListGroup.Item key={index} variant="success" className="mb-2">
-                  {image.desc}
+                  {shortenDesc(image.desc)}
                   <p className="float-end">
                     Rating result mean:{" "}
-                    <strong>{ratingsData[index] || "No ratings yet"}</strong>
+                    <strong style={{ color: "black" }}>
+                      {ratingsData[index] || "Not rated"}
+                    </strong>
                   </p>
                 </ListGroup.Item>
               </Form>
@@ -34,7 +43,7 @@ function ShowRatings({ show, handleClose, imagesData, ratingsData }) {
           </ListGroup>
           <Button
             onClick={handleClose}
-            variant="info"
+            variant="secondary"
             type="info"
             className="w-25 mx-auto mt-2 float-end"
           >

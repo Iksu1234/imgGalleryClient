@@ -7,12 +7,14 @@ import NavDropleft from "react-bootstrap/NavDropdown";
 import AddImage from "./addImage";
 import DeleteImage from "./deleteImage";
 import Info from "./info";
+import Settings from "./settings";
 import NavbarBrand from "react-bootstrap/esm/NavbarBrand";
 import Button from "react-bootstrap/Button";
 import ShowRatings from "./showRatings";
 
 function Header({
   isAdmin,
+  isLoggedIn,
   triggerRefresh,
   images,
   ratingsData,
@@ -22,6 +24,7 @@ function Header({
   const [isOpenDel, setOpenDel] = useState(false);
   const [isOpenInfo, setOpenInfo] = useState(false);
   const [isOpenRatings, setOpenRatings] = useState(false);
+  const [isOpenSettings, setOpenSettings] = useState(false);
 
   const handleAddModal = () => {
     setOpenAdd(false);
@@ -34,6 +37,9 @@ function Header({
   };
   const handleRatingModal = () => {
     setOpenRatings(false);
+  };
+  const handleSettingModal = () => {
+    setOpenSettings(false);
   };
 
   return (
@@ -55,30 +61,34 @@ function Header({
           </Col>
           <Col className="d-flex align-items-center justify-content-center">
             <Nav variant="pills">
-              <Nav.Item>
-                <Button
-                  className="box-shadow mx-2"
-                  variant="info"
-                  onClick={() => changeScreen("current")}
-                >
-                  Current
-                </Button>
-              </Nav.Item>
-              <Nav.Item>
-                <Button
-                  className="box-shadow mx-2"
-                  variant="info"
-                  onClick={() => changeScreen("history")}
-                >
-                  History
-                </Button>
-              </Nav.Item>
+              {isLoggedIn && (
+                <Nav.Item>
+                  <Button
+                    className="box-shadow mx-2"
+                    variant="secondary"
+                    onClick={() => changeScreen("current")}
+                  >
+                    Current
+                  </Button>
+                </Nav.Item>
+              )}
+              {isLoggedIn && (
+                <Nav.Item>
+                  <Button
+                    className="box-shadow mx-2"
+                    variant="secondary"
+                    onClick={() => changeScreen("history")}
+                  >
+                    History
+                  </Button>
+                </Nav.Item>
+              )}
             </Nav>
             <div className="float-end">
               <Nav className="mx-auto">
                 <NavDropleft
                   title={
-                    <Button className="box-shadow" variant="info">
+                    <Button className="box-shadow" variant="secondary">
                       Menu
                     </Button>
                   }
@@ -96,6 +106,11 @@ function Header({
                   {isAdmin && (
                     <NavDropleft.Item onClick={setOpenRatings}>
                       Image ratings
+                    </NavDropleft.Item>
+                  )}
+                  {isAdmin && (
+                    <NavDropleft.Item onClick={setOpenSettings} disabled>
+                      Settings
                     </NavDropleft.Item>
                   )}
                   <NavDropleft.Item onClick={setOpenInfo}>
@@ -123,6 +138,11 @@ function Header({
         handleClose={handleRatingModal}
         imagesData={images}
         ratingsData={ratingsData}
+      />
+      <Settings
+        show={isOpenSettings}
+        handleClose={handleSettingModal}
+        triggerRefresh={triggerRefresh}
       />
       <Info
         show={isOpenInfo}

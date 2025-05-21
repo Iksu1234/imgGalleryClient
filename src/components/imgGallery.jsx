@@ -77,6 +77,7 @@ function ImgGallery() {
       <div>
         <Header
           isAdmin={isAdmin}
+          isLoggedIn={isLoggedIn}
           triggerRefresh={triggerRefresh}
           images={imagesData}
           ratingsData={ratingsData}
