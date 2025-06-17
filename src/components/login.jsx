@@ -26,7 +26,8 @@ function Login({ onLoginSuccess }) {
         alert("Login failed");
       }
     } catch (error) {
-      console.error("Error:", error);
+      console.error("ErrorTESTI:", error);
+      alert("Login failed");
     }
   };
   return (
