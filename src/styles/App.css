@@ -25,6 +25,14 @@ body {
   width: 100%;
   height: auto;
 }
+.login-button {
+  margin-top: 0;
+  margin-bottom: 0;
+  min-width: 5vw;
+}
+.login-spinner {
+  min-width: 5vw;
+}
 
 .full-width-header {
   margin-bottom: 0px;

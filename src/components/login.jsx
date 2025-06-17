@@ -1,15 +1,18 @@
 import { useRef } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
+import Spinner from "react-bootstrap/Spinner";
 import { postLogin } from "../services/apiService";
+import { useState } from "react";
 
 function Login({ onLoginSuccess }) {
+  const [loading, setLoading] = useState(false);
   const passwordRef = useRef(null);
   const accountRef = useRef(null);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-
+    setLoading(true);
     try {
       const response = await postLogin(
         accountRef.current.value,
@@ -28,6 +31,8 @@ function Login({ onLoginSuccess }) {
     } catch (error) {
       console.error("ErrorTESTI:", error);
       alert("Login failed");
+    } finally {
+      setLoading(false); // Hide spinner
     }
   };
   return (
@@ -59,8 +64,24 @@ function Login({ onLoginSuccess }) {
           className="box-shadow"
         />
       </Form.Group>
-      <Button variant="info" type="submit" className="box-shadow">
-        Submit
+      <Button
+        variant="info"
+        type="submit"
+        className="box-shadow"
+        disabled={loading}
+      >
+        {!loading && <p className="login-button">Login</p>}
+        {loading && (
+          <div className="login-spinner">
+            <Spinner
+              as="span"
+              animation="border"
+              size="sm"
+              role="status"
+              aria-hidden="true"
+            />
+          </div>
+        )}
       </Button>
     </Form>
   );
