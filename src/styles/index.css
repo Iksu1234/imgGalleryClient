@@ -59,6 +59,12 @@ h1 {
     rgba(0, 0, 0, 0)
   );
 }
+.modal {
+  color: #ffffff !important;
+  --bs-modal-bg: #4a4a4a !important;
+  --bs-modal-footer-border-color: black !important;
+  --bs-modal-header-border-color: black !important;
+}
 
 .login-form {
   width: 400px;
