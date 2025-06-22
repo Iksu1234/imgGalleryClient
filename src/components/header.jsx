@@ -45,8 +45,7 @@ function Header({
   return (
     <>
       <Navbar
-        expand="md"
-        className="jumbotron bg-transparent full-width-header header-font d-flex align-items-center justify-content-center text-center"
+        className="jumbotron z-3 pt-5 bg-transparent full-width-header header-font d-flex align-items-center justify-content-center text-center"
         style={{ height: "10vh" }}
       >
         <Row className="w-100">
@@ -64,7 +63,7 @@ function Header({
               {isLoggedIn && (
                 <Nav.Item>
                   <Button
-                    className="box-shadow mx-2"
+                    className="box-shadow mx-2 my-2"
                     variant="secondary"
                     onClick={() => changeScreen("current")}
                   >
@@ -75,7 +74,7 @@ function Header({
               {isLoggedIn && (
                 <Nav.Item>
                   <Button
-                    className="box-shadow mx-2"
+                    className="box-shadow mx-2 my-2"
                     variant="secondary"
                     onClick={() => changeScreen("history")}
                   >
@@ -88,7 +87,10 @@ function Header({
               <Nav className="mx-auto">
                 <NavDropleft
                   title={
-                    <Button className="box-shadow" variant="secondary">
+                    <Button
+                      className="box-shadow mx-2 my-2"
+                      variant="secondary"
+                    >
                       Menu
                     </Button>
                   }
