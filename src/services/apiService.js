@@ -50,25 +50,52 @@ export const deleteImages = async (images) => {
     error.message = "Failed to delete images";
   }
 };
-
+/*
 //PATCH ratings to api
 export const patchRatings = async (ratings) => {
+  await fetch(API_URL + "/ratings", {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(ratings),
+  })
+    .then((response) => response)
+    .then((data) => {
+      console.log("response:" + data.status);
+      alert("Ratings sent successfully");
+      return true;
+    })
+    .catch((error) => {
+      console.log("error sending ratings: " + error.message);
+      alert("Failed to send ratings: " + error.message);
+    });
+};*/
+export const patchRatings = async (ratings) => {
   try {
-    fetch(API_URL + "/ratings", {
+    const response = await fetch(API_URL + "/ratings", {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(ratings),
-    }).then((response) => {
-      if (!response.ok) {
-        throw new Error("Failed to send ratings");
-      } else {
-        alert("Ratings sent successfully");
-      }
     });
+
+    if (!response.ok) {
+      const errorText = await response.text();
+      console.log("error sending ratings: " + errorText);
+      alert("Failed to send ratings: " + errorText);
+      return { ok: false, status: response.status, error: errorText };
+    }
+
+    const data = await response.json().catch(() => null);
+    console.log("response:", response.status);
+    alert("Ratings sent successfully");
+    return { ok: true, status: response.status, data };
   } catch (error) {
-    error.message = "Failed to send ratings";
+    console.log("error sending ratings: " + error.message);
+    alert("Failed to send ratings: " + error.message);
+    return { ok: false, status: null, error: error.message };
   }
 };
 

@@ -70,9 +70,9 @@ function Login({ onLoginSuccess }) {
         className="box-shadow"
         disabled={loading}
       >
-        {!loading && <p className="login-button">Login</p>}
+        {!loading && <p className="spinner-button">Login</p>}
         {loading && (
-          <div className="login-spinner">
+          <div className="button-spinner">
             <Spinner
               as="span"
               animation="border"
